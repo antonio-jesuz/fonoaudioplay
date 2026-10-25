@@ -1,0 +1,47 @@
+{
+  "name": "fonoaudioplay",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "vite",
+    "dev:api": "tsx watch api/server.ts",
+    "set:role": "tsx api/set-role.ts",
+    "build": "tsc -p api/tsconfig.json && vite build",
+    "start": "node dist-api/server.js",
+    "preview": "vite preview",
+    "typecheck": "tsc -p api/tsconfig.json --noEmit && tsc -p tsconfig.app.json --noEmit"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.0.1",
+    "@fastify/helmet": "^13.0.1",
+    "@fastify/multipart": "^9.0.3",
+    "@fastify/rate-limit": "^10.2.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "better-sqlite3": "^11.8.1",
+    "dotenv": "^16.4.7",
+    "fastify": "^5.2.1",
+    "firebase": "^11.10.0",
+    "firebase-admin": "^14.5.0",
+    "openai": "^7.43.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/node": "^22.13.4",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0"
+  },
+  "overrides": {
+    "@grpc/grpc-js": "^1.14.6",
+    "uuid": "^11.1.1"
+  }
+}

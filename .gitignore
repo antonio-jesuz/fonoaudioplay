@@ -1,0 +1,8 @@
+node_modules/
+dist-api/
+dist-web/
+data/
+.env
+.env.*
+!.env.example
+firebase-service-account*.json
