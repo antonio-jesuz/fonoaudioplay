@@ -14,7 +14,7 @@ import { db, recordingsDirectory } from "./db.js";
 
 const app = Fastify({ logger: true, bodyLimit: 1024 * 1024 });
 const port = Number(process.env.PORT ?? 3001);
-const host = process.env.HOST ?? "127.0.0.1";
+const host = process.env.HOST ?? "0.0.0.0";
 const origins = (process.env.WEB_ORIGIN ?? "http://localhost:5173").split(",").map((origin) => origin.trim());
 
 await app.register(helmet, { crossOriginResourcePolicy: { policy: "cross-origin" } });
