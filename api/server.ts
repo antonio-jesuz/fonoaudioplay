@@ -3,9 +3,10 @@ import cors from "@fastify/cors";
 import helmet from "@fastify/helmet";
 import multipart from "@fastify/multipart";
 import rateLimit from "@fastify/rate-limit";
+import fastifyStatic from "@fastify/static";
 import Fastify from "fastify";
 import { randomUUID } from "node:crypto";
-import { createReadStream } from "node:fs";
+import { createReadStream, existsSync } from "node:fs";
 import { mkdir, unlink, writeFile } from "node:fs/promises";
 import { extname, resolve } from "node:path";
 import { z, ZodError } from "zod";
@@ -345,6 +346,17 @@ app.route({
     return { text: transcription };
   },
 });
+
+const webRoot = resolve(import.meta.dirname, "../dist-web");
+if (existsSync(webRoot)) {
+  await app.register(fastifyStatic, { root: webRoot });
+  app.setNotFoundHandler((request, reply) => {
+    if (request.method !== "GET" || request.url.startsWith("/api/")) {
+      return reply.code(404).send({ error: "Not found" });
+    }
+    return reply.sendFile("index.html");
+  });
+}
 
 app.listen({ port, host }).catch((error: unknown) => {
   app.log.error(error);
